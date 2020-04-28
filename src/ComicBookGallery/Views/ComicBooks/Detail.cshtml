@@ -1,36 +1,46 @@
-﻿@model ComicBookGallery.Models.ComicBook
+﻿@{
+    Layout = null;
 
-@{
-    ViewBag.Title = Model.DisplayText;
-    ViewBag.ShowBackBar = true;
+    var seriesTitle = "The Amazing Spide-Man";
+    var issueNumber = 700;
+    var description ="<p>Final issue! Witness the final hours of Doctor Octopus' life and his one ,last , great act of revenge! Even if Spider-Man survives...<strong>will Peter Parker?</strong></p>";
+    var artists = new string[]
+    {
+        "Script : Dan Slott",
+        "Pencils : Humberto Ramos",
+        "Inks : VIctor Olazaba",
+        "Colors: Edgar Degado",
+        "Letters : Chris Elioupoulos"
+    };
 }
 
-<h2>@Model.DisplayText</h2>
+<!DOCTYPE html>
 
-<div class="row">
-    <div class="col-md-6">
-        <div class="well">
-            <h5><label>Series Title:</label> @Model.SeriesTitle</h5>
-            <h5><label>Issue #:</label> @Model.IssueNumber</h5>
-            <h5><label>Favorite:</label> @(Model.Favorite ? "Yes" : "No")</h5>
-            @if (Model.Artists.Length > 0)
-            {
-                <h5>Artists:</h5>
-                <div>
-                    <ul>
-                        @foreach (var artist in Model.Artists)
-                        {
-                            <li>@artist.Role: @artist.Name</li>
-                        }
-                    </ul>
-                </div>
-            }
-        </div>
-        <h5>Description</h5>
-        <div>@Html.Raw(@Model.DescriptionHtml)</div>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <h1>@seriesTitle</h1>
+        <h2>Issue #@issueNumber</h2>
+        
+        <h5>Description:</h5>
+        <div>@Html.Raw(description)</div>
+        
+        @if (artists.Length > 0)
+        {
+            <h5>Artists:</h5>
+            <div>
+                <ul>
+                    @foreach (var artist in artists)
+                    {
+                        <li>@artist</li>
+                    }
+                </ul>
+            </div>
+        }
     </div>
-    <div class="col-md-6">
-        <img src="/Images/@Model.CoverImageFileName"
-             alt="@Model.DisplayText" class="img-responsive" />
-    </div>
-</div>
+</body>
+</html>
